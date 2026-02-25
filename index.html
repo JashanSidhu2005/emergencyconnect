@@ -8,16 +8,16 @@
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Your custom styles -->
-  <link href="styles.css" rel="stylesheet">
+  <!-- Your custom styles (IMPORTANT: file name is style.css) -->
+  <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
 
-<!-- NAVBAR (corrected & inside body) -->
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-danger">
   <div class="container">
-    <h1 class="magic-font text-white mb-0">India</h1>
+    <span class="navbar-brand magic-font">India</span>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
       <span class="navbar-toggler-icon"></span>
@@ -35,33 +35,78 @@
   </div>
 </nav>
 
-<!-- HERO SECTION WITH BACKGROUND -->
-<div class="hero">
+<!-- HERO WITH BACKGROUND -->
+<div class="hero text-white">
 
-  <header class="site-header text-center text-white py-4">
-    <div class="container">
-      <h1 class="kaleidoscope-font">EMERGENCY NUMBERS</h1>
-      <p class="subtitle">Quick contacts for safety in India</p>
+  <header class="site-header py-4">
+    <div class="container text-center">
+      <h1 class="kaleidoscope-font mb-2">EMERGENCY NUMBERS</h1>
+      <p class="subtitle mb-3">Instant access to critical help across India</p>
 
-      <div class="d-flex align-items-center justify-content-center gap-2 mt-2">
-        <span class="fw-bold">Send your live location :</span>
-        <button id="whatsappSOS" class="btn btn-success">WhatsApp SOS</button>
+      <div class="row align-items-center justify-content-center g-3">
+        <div class="col-md-6 text-md-end text-center">
+          <p class="mb-1 fw-semibold">
+            Share your live location instantly with your trusted contact on WhatsApp.
+          </p>
+          <small class="text-light-50">
+            Useful in road accidents, medical emergencies, or when you feel unsafe.
+          </small>
+        </div>
+        <div class="col-md-3 text-md-start text-center">
+          <button id="whatsappSOS" class="btn btn-success w-100">
+            WhatsApp SOS
+          </button>
+        </div>
       </div>
     </div>
   </header>
 
   <main class="container py-4">
 
+    <!-- Quick highlight cards -->
+    <div class="row g-3 mb-4">
+      <div class="col-md-4">
+        <div class="card bg-dark bg-opacity-50 text-white border-0">
+          <div class="card-body">
+            <h5 class="card-title mb-1">All-India Emergency</h5>
+            <p class="card-text mb-0">Dial <strong>112</strong> for any emergency (police, fire, ambulance).</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-dark bg-opacity-50 text-white border-0">
+          <div class="card-body">
+            <h5 class="card-title mb-1">Women Helpline</h5>
+            <p class="card-text mb-0">Dedicated support and quick response in distress situations.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card bg-dark bg-opacity-50 text-white border-0">
+          <div class="card-body">
+            <h5 class="card-title mb-1">Disaster & Rescue</h5>
+            <p class="card-text mb-0">Floods, earthquakes, and other natural disasters support.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Search + controls -->
     <input
       type="text"
       id="searchInput"
-      placeholder="Search emergency service..."
+      placeholder="Search emergency service or state..."
       class="form-control mb-3"
     >
 
-    <button id="nearbyBtn" class="btn btn-primary mb-3">Find Nearby Hospitals & Police</button>
-    <button id="panicBtn" class="btn btn-danger w-100 mb-3">PANIC BUTTON</button>
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <button id="nearbyBtn" class="btn btn-primary">
+        Find Nearby Hospitals & Police
+      </button>
+      <button id="panicBtn" class="btn btn-danger flex-grow-1">
+        PANIC BUTTON
+      </button>
+    </div>
 
     <!-- Cards grid -->
     <div id="cardsGrid" class="row g-3"></div>
@@ -70,7 +115,7 @@
 
 </div> <!-- end hero -->
 
-<!-- Your script (must be last) -->
+<!-- Scripts -->
 <script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
