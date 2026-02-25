@@ -71,19 +71,13 @@ body {
 .hero {
     min-height: 100vh;
 
-    /* Your chosen color */
-    background: #b69797;
-
-    /* Dark overlay + your image */
-    background-image: linear-gradient(
-        rgba(0, 0, 0, 0.35),
-        rgba(0, 0, 0, 0.35)
-    ),
-    url('images/bg.jpg');   /* <-- SAME PATH AS YOUR OTHER IMAGES */
+    /* ONLY your background picture */
+    background-image: url('images/bg.jpg');
 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
 
-    padding-bottom: 40px;
+    padding-top: 80px;
+    padding-bottom: 120px;
 }
