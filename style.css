@@ -83,8 +83,6 @@ body {
   text-shadow: none;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Pacifico&display=swap');
-
 .brand-logo-img {
   height: 50px; /* Small logo */
   width: 50px; /* Perfect square base for a circle */
@@ -100,28 +98,19 @@ body {
   transform: scale(1.15) rotate(-10deg);
 }
 
-/* Stylish Google-like Text Typography */
+/* Simple Clean Typography */
 .stylish-brand {
-    font-family: 'Nunito', sans-serif;
-    font-size: 1.8rem;
+    font-family: 'Inter', sans-serif;
+    font-size: 1.6rem;
     font-weight: 800;
-    letter-spacing: -0.5px;
+    letter-spacing: -1px;
     text-decoration: none;
     margin-top: 2px;
 }
 
-.special-font {
-    font-family: 'Pacifico', cursive;
-    font-size: 2.2rem;
-    padding-right: 2px;
-    font-weight: 400;
-}
-
-/* Google Brand Colors */
-.c-blue { color: #4285F4; }
-.c-red { color: #EA4335; }
-.c-yellow { color: #FBBC05; }
-.c-green { color: #34A853; }
+/* Brand Colors */
+.c-blue { color: #2563eb; text-shadow: 1px 1px 2px rgba(255,255,255,0.1); }
+.c-red { color: var(--accent-color); text-shadow: 1px 1px 2px rgba(255,255,255,0.1); }
 
 @media (max-width: 991.98px) {
   .navbar-bottom .navbar-nav {
