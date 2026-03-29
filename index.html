@@ -12,42 +12,45 @@
 
 <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark">
-<div class="container">
-<a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
-<img src="images/logo.png" alt="24/7 Emergency" class="brand-logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/100x45?text=LOGO';">
-</a>
-<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
-<span class="navbar-toggler-icon"></span>
-</button>
+<!-- HEADER REDESIGN -->
+<header class="site-header">
+  <div class="header-top py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+      <!-- Logo -->
+      <a class="navbar-brand m-0" href="index.html">
+        <img src="images/logo.png" alt="24/7 Emergency" class="brand-logo-img" onerror="this.onerror=null; this.src='https://via.placeholder.com/100x45?text=LOGO';">
+      </a>
+      
+      <!-- Controls -->
+      <div class="header-controls d-flex align-items-center gap-2 gap-md-3">
+        <select id="langSelect" class="form-select border-secondary form-select-sm" style="background-color: var(--input-bg); color: var(--text-primary); width: auto;">
+          <option value="en">English</option>
+          <option value="pa">ਪੰਜਾਬੀ</option>
+          <option value="hi">हिन्दी</option>
+          <option value="fr">Français</option>
+        </select>
+        <button id="themeToggle" class="theme-toggle m-0 pt-0 pb-0" aria-label="Toggle Mode">🌙</button>
+        <button class="navbar-toggler d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" style="background: transparent; border: 1px solid var(--text-secondary); padding: 4px 8px; border-radius: 5px; color: var(--text-primary); font-size: 1.5rem; line-height: 1;">
+          ☰
+        </button>
+      </div>
+    </div>
+  </div>
 
-<div class="collapse navbar-collapse" id="navMenu">
-<ul class="navbar-nav ms-auto align-items-center">
-<li class="nav-item"><a class="nav-link active" href="index.html" data-i18n="nav_home">Home</a></li>
-<li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav_about">About</a></li>
-<li class="nav-item"><a class="nav-link" href="services.html" data-i18n="nav_services">Services</a></li>
-<li class="nav-item"><a class="nav-link" href="safety.html" data-i18n="nav_safety">Safety Tips</a></li>
-<li class="nav-item"><a class="nav-link" href="contact.html" data-i18n="nav_contact">Contact</a></li>
-
-<!-- Language Selector -->
-<li class="nav-item mt-2 mt-lg-0 ms-lg-3">
-<select id="langSelect" class="form-select border-secondary form-select-sm" style="background-color: var(--input-bg); color: var(--text-primary);">
-    <option value="en">English</option>
-    <option value="pa">ਪੰਜਾਬੀ</option>
-    <option value="hi">हिन्दी</option>
-    <option value="fr">Français</option>
-</select>
-</li>
-
-<!-- Dark/Light Mode Toggle -->
-<li class="nav-item mt-2 mt-lg-0">
-<button id="themeToggle" class="theme-toggle" aria-label="Toggle Dark/Light Mode">🌙</button>
-</li>
-</ul>
-</div>
-</div>
-</nav>
+  <nav class="navbar-bottom navbar-expand-lg">
+    <div class="container">
+      <div class="collapse navbar-collapse justify-content-center" id="mainNav">
+        <ul class="navbar-nav gap-lg-4 py-2 py-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html" data-i18n="nav_home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html" data-i18n="nav_about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="services.html" data-i18n="nav_services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="safety.html" data-i18n="nav_safety">Safety Tips</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
 
 <!-- HERO -->
 <section class="hero">
