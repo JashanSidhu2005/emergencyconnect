@@ -2,7 +2,7 @@
   /* Default: Dark Theme */
   --bg-color: #0b0f19;
   --text-primary: #f8f9fa;
-  --text-secondary: #adb5bd;
+  --text-secondary: #ced4da; /* Brightened for WCAG AA Contrast */
   --accent-color: #ef4444; /* Emergency Red */
   --accent-hover: #dc2626;
   --glass-bg: rgba(255, 255, 255, 0.05);
@@ -201,23 +201,34 @@ body {
   font-size: 1.1rem;
   border-radius: 50px;
   border: none;
-  box-shadow: 0 0 20px rgba(239, 68, 68, 0.4);
+  position: relative;
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  animation: pulse 2s infinite;
+  z-index: 1;
+}
+
+/* Hardware-Accelerated Animation using scale and opacity */
+.btn-panic::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50px;
+  border: 2px solid var(--accent-color);
+  animation: pulseAccelerated 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  z-index: -1;
 }
 
 .btn-panic:hover {
   background-color: var(--accent-hover);
   transform: translateY(-3px) scale(1.02);
-  box-shadow: 0 0 30px rgba(239, 68, 68, 0.6);
+  box-shadow: 0 6px 20px rgba(239, 68, 68, 0.6);
   color: white;
 }
 
-@keyframes pulse {
-  0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-  70% { box-shadow: 0 0 0 20px rgba(239, 68, 68, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+@keyframes pulseAccelerated {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.3); opacity: 0; }
 }
 
 /* CONTROLS (SEARCH & COUNTRY) */
