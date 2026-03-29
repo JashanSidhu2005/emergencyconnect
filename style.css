@@ -83,20 +83,45 @@ body {
   text-shadow: none;
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@800&family=Pacifico&display=swap');
+
 .brand-logo-img {
-  height: 140px; /* Make it massive like a badge */
-  width: auto;
-  margin-bottom: -60px; /* Forces the box to bleed down perfectly over the red line */
-  position: relative;
-  z-index: 1050; /* Sits sharply above the red navigation bar */
-  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
-  filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4));
+  height: 50px; /* Small logo */
+  width: 50px; /* Perfect square base for a circle */
+  border-radius: 50%; /* Make it a perfect circle */
+  background-color: #ffffff; /* Hide corner clipping if image is white */
+  border: 3px solid #1a1a1a; /* Black cover border */
+  object-fit: contain;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
-.brand-logo-img:hover {
-  transform: scale(1.08) translateY(-5px);
-  filter: drop-shadow(0 8px 20px rgba(239, 68, 68, 0.6));
+.navbar-brand:hover .brand-logo-img {
+  transform: scale(1.15) rotate(-10deg);
 }
+
+/* Stylish Google-like Text Typography */
+.stylish-brand {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+    text-decoration: none;
+    margin-top: 2px;
+}
+
+.special-font {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.2rem;
+    padding-right: 2px;
+    font-weight: 400;
+}
+
+/* Google Brand Colors */
+.c-blue { color: #4285F4; }
+.c-red { color: #EA4335; }
+.c-yellow { color: #FBBC05; }
+.c-green { color: #34A853; }
 
 @media (max-width: 991.98px) {
   .navbar-bottom .navbar-nav {
