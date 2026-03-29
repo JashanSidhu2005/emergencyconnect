@@ -3,22 +3,22 @@
 -------------------------------------- */
 const emergencyData = {
     india: [
-        { title: "Police", number: "100", img: "images/police.jpg" },
-        { title: "Ambulance", number: "102", img: "images/ambulance.jpg" },
-        { title: "Fire", number: "101", img: "images/fire.jpg" },
-        { title: "Women Helpline", number: "1091", img: "images/women.jpg" },
-        { title: "Child Helpline", number: "1098", img: "images/child.jpg" },
-        { title: "Cyber Crime", number: "1930", img: "images/cyber.jpg" },
-        { title: "Tourist Helpline", number: "1363", img: "images/tourist.jpg" },
-        { title: "Road Accident", number: "1073", img: "images/road.jpg" },
-        { title: "Disaster Management", number: "108", img: "images/disaster.jpg" }
+        { key: "cat_police", number: "100", img: "images/police.jpg" },
+        { key: "cat_ambulance", number: "102", img: "images/ambulance.jpg" },
+        { key: "cat_fire", number: "101", img: "images/fire.jpg" },
+        { key: "cat_women", number: "1091", img: "images/women.jpg" },
+        { key: "cat_child", number: "1098", img: "images/child.jpg" },
+        { key: "cat_cyber", number: "1930", img: "images/cyber.jpg" },
+        { key: "cat_tourist", number: "1363", img: "images/tourist.jpg" },
+        { key: "cat_road", number: "1073", img: "images/road.jpg" },
+        { key: "cat_disaster", number: "108", img: "images/disaster.jpg" }
     ],
     canada: [
-        { title: "Police, Fire, Ambulance", number: "911", img: "images/canadapolice.jpg" },
-        { title: "Poison Control", number: "1-844-POISON-X", img: "images/canadahealth.jpg" },
-        { title: "Mental Health Crisis", number: "988", img: "images/canadamental.jpg" },
-        { title: "Telehealth Ontario", number: "811", img: "images/canadaambulance.jpg" },
-        { title: "Kids Help Phone", number: "1-800-668-6868", img: "images/canadachild.jpg" }
+        { key: "cat_pfa", number: "911", img: "images/canadapolice.jpg" },
+        { key: "cat_poison", number: "1-844-POISON-X", img: "images/canadahealth.jpg" },
+        { key: "cat_mental", number: "988", img: "images/canadamental.jpg" },
+        { key: "cat_telehealth", number: "811", img: "images/canadaambulance.jpg" },
+        { key: "cat_kidshelp", number: "1-800-668-6868", img: "images/canadachild.jpg" }
     ]
 };
 
@@ -30,19 +30,61 @@ const currentTheme = localStorage.getItem("theme") || "dark";
 document.documentElement.setAttribute("data-theme", currentTheme);
 
 if (themeToggleBtn) {
-    // Set initial icon based on theme
     themeToggleBtn.innerHTML = currentTheme === "dark" ? "☀️" : "🌙";
-
     themeToggleBtn.addEventListener("click", () => {
         let theme = document.documentElement.getAttribute("data-theme");
         let newTheme = theme === "dark" ? "light" : "dark";
-
         document.documentElement.setAttribute("data-theme", newTheme);
         localStorage.setItem("theme", newTheme);
-
         themeToggleBtn.innerHTML = newTheme === "dark" ? "☀️" : "🌙";
     });
 }
+
+// --------------------------------------
+// MULTI-LANGUAGE ENGINE
+// --------------------------------------
+function getLang() {
+    return localStorage.getItem("lang") || "en";
+}
+
+let currentLang = getLang();
+
+function updateLanguage(lang) {
+    if (!translations || !translations[lang]) return;
+    
+    // Update all static elements with data-i18n
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) {
+            if(el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+                el.placeholder = translations[lang][key];
+            } else {
+                el.innerHTML = translations[lang][key];
+            }
+        }
+    });
+
+    // Re-render dynamic cards with translated titles
+    const countrySelectLocal = document.getElementById("countrySelect");
+    if(countrySelectLocal) {
+        renderCards(countrySelectLocal.value);
+    }
+}
+
+// We attach event listener to document in case nav is not fully parsed
+document.addEventListener("DOMContentLoaded", () => {
+    const langSelect = document.getElementById("langSelect");
+    if(langSelect) {
+        langSelect.value = currentLang;
+        langSelect.addEventListener("change", (e) => {
+            currentLang = e.target.value;
+            localStorage.setItem("lang", currentLang);
+            updateLanguage(currentLang);
+        });
+    }
+    updateLanguage(currentLang);
+});
+
 
 // --------------------------------------
 // INITIALIZE GRID
@@ -52,28 +94,32 @@ const countrySelect = document.getElementById("countrySelect");
 const searchInput = document.getElementById("searchInput");
 
 function renderCards(country) {
-    if (!grid) return; // if not on a page with a grid
+    if (!grid) return; 
 
     grid.innerHTML = "";
     const services = emergencyData[country] || [];
+    
+    // Get translations for current lang, default to EN
+    const currentDict = translations[currentLang] || translations["en"];
 
     services.forEach((s, index) => {
+        const titleTranslated = currentDict[s.key] || "Emergency";
+        const callBtnTranslated = currentDict["btn_call"] || "Call Now";
+
         const card = document.createElement("div");
         card.className = "col-12 col-md-6 col-lg-4";
-        // Adding a slight delay to animation for each card
         card.style.animation = `fadeInUp 0.5s ease forwards ${(index * 0.05)}s`;
         card.style.opacity = "0";
 
-        // Handle missing images by having a fallback
         const imgSrc = s.img ? s.img : 'images/bg.jpg';
 
         card.innerHTML = `
             <div class="card-box">
-                <img src="${imgSrc}" alt="${s.title}" onerror="this.src='https://via.placeholder.com/400x200?text=Emergency'">
+                <img src="${imgSrc}" alt="${titleTranslated}" onerror="this.src='https://via.placeholder.com/400x200?text=Emergency'">
                 <div class="card-body-custom">
-                    <div class="card-title">${s.title}</div>
+                    <div class="card-title">${titleTranslated}</div>
                     <div class="card-number">${s.number}</div>
-                    <a href="tel:${s.number.replace(/\D/g, '')}" class="btn btn-call w-100">Call Now</a>
+                    <a href="tel:${s.number.replace(/\D/g, '')}" class="btn btn-call w-100">${callBtnTranslated}</a>
                 </div>
             </div>
         `;
@@ -81,7 +127,6 @@ function renderCards(country) {
     });
 }
 
-// Global animation style injection
 const style = document.createElement('style');
 style.innerHTML = `
 @keyframes fadeInUp {
@@ -92,13 +137,11 @@ style.innerHTML = `
 document.head.appendChild(style);
 
 if (countrySelect) {
-    // Initial Render
     renderCards(countrySelect.value);
 
-    // Render on Change
     countrySelect.addEventListener("change", (e) => {
         renderCards(e.target.value);
-        if (searchInput) searchInput.value = ""; // clear search on country switch
+        if (searchInput) searchInput.value = "";
     });
 }
 
@@ -132,12 +175,12 @@ if (panicBtn) {
                     let message = `🚨 EMERGENCY ALERT 🚨\n\nI need immediate assistance. My live location:\nhttps://www.google.com/maps?q=${lat},${lon}`;
                     let url = `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
 
-                    panicBtn.innerHTML = "🚨 PANIC BUTTON – SHARE LIVE LOCATION";
+                    panicBtn.innerHTML = translations[currentLang]?.panic_btn || "🚨 PANIC BUTTON – SHARE LIVE LOCATION";
                     window.location.href = url;
                 },
                 function (error) {
-                    alert("Location access is required to send emergency alert. Please enable it in your browser settings.");
-                    panicBtn.innerHTML = "🚨 PANIC BUTTON – SHARE LIVE LOCATION";
+                    alert("Location access is required to send emergency alert.");
+                    panicBtn.innerHTML = translations[currentLang]?.panic_btn || "🚨 PANIC BUTTON – SHARE LIVE LOCATION";
                 }
             );
         } else {
